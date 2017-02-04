@@ -1,16 +1,22 @@
 import React, { Component } from 'react';
+import Top from './components/Top.js';
 
 class App extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      array: [[]]
+      array: [],
       rendered: {}
     };
   }
 
+  updateArray(){
+    this.state.array.push(Top.getSolid(window.innerWidth / 14))
+  }
+
   renderArray() {
+    this.updateArray();
     var str = "";
     this.state.array.forEach(function(row){
       str += "<p>";
@@ -23,7 +29,7 @@ class App extends Component {
   }
 
   render() {
-    return (  
+    return (
       <div className="App" dangerouslySetInnerHTML={{ __html: this.renderArray() }} />
     );
   }
