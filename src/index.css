@@ -1,5 +1,14 @@
-body {
-  margin: 0;
+html, body {
+  margin: 0 15px;
   padding: 0;
-  font-family: sans-serif;
+
+  font-family: monospace;
+  font-size: 24px;
+  white-space: pre;
+
+  color: white;
+  background-color: #0000FF;
+
+  overflow-x: hidden;
+  overflow-y: hidden;
 }
