@@ -5,7 +5,10 @@ class Top extends Component {
   static getSolid(width) {
     var arr = [];
     for(var i=0; i < width; i++){
-      arr.push("-");
+      arr.push({
+        char: "-",
+        color: "#000"
+      });
     }
     return arr;
   }
@@ -14,9 +17,15 @@ class Top extends Component {
     var arr = [];
     for(var i=0; i < width; i++){
       if(Math.random() > 0.9)
-        arr.push("~");
+        arr.push({
+          char:"~",
+          color: "#FFF"
+        });
       else
-        arr.push(" ");
+        arr.push({
+          char: " ",
+          color: ""
+          });
     }
     return arr;
   }

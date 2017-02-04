@@ -14,7 +14,7 @@ class App extends Component {
     }
   }
   setBackground(arr){
-    var width = window.innerWidth / 14 + 7
+    var width = window.innerWidth / 10
     arr[0] = Top.getSolid(width);
     for(var i = 1; i < 4; i ++){
       arr[i] = Top.getWave(width);
@@ -37,8 +37,8 @@ class App extends Component {
   renderArray() {
     var str = "";
     this.state.array.forEach(function(row){
-      row.forEach(function(char){
-        str += char;
+      row.forEach(function(obj){
+        str += "<span style='color:" + obj.color + "'>" + obj.char + "</span>";
       });
       str += "<br />";
     });
