@@ -9,20 +9,20 @@ class App extends Component {
       array: [],
       rendered: {}
     };
-    for(var i = 0; i < window.innerHeight / 35; i++){
+    for(var i = 0; i < window.innerHeight / 24 - 1; i++){
       this.state.array[i] = [];
     }
   }
   setBackground(arr){
-    arr[0] = Top.getSolid(window.innerWidth / 14);
+    var width = window.innerWidth / 14 + 7
+    arr[0] = Top.getSolid(width);
     for(var i = 1; i < 4; i ++){
-      arr[i] = Top.getWave(window.innerWidth / 14);
+      arr[i] = Top.getWave(width);
     }
-    arr[this.state.array.length - 1] = Top.getSolid(window.innerWidth / 14);
+    arr[this.state.array.length - 1] = Top.getSolid(width);
 
   }
   updateArray(){
-    console.log("tick");
     var arr = this.state.array;
     this.setBackground(arr);
     return arr;
@@ -35,9 +35,7 @@ class App extends Component {
   }
 
   renderArray() {
-    this.updateArray();
     var str = "";
-    console.log(this.state.array);
     this.state.array.forEach(function(row){
       row.forEach(function(char){
         str += char;
