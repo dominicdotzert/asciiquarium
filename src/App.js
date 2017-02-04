@@ -9,21 +9,33 @@ class App extends Component {
       array: [],
       rendered: {}
     };
+    for(var i = 0; i < window.innerHeight / 24; i++){
+      this.state.array[i] = [];
+    }
   }
+  setBackground(arr){
+    arr[0] = Top.getSolid(window.innerWidth / 14);
+    for(var i = 1; i < 4; i ++){
+      arr[i] = Top.getWave(window.innerWidth / 14);
+    }
+    //WAVES
+    arr[this.state.array.length - 1] = Top.getSolid(window.innerWidth / 14);
 
+  }
   updateArray(){
-    this.state.array.push(Top.getSolid(window.innerWidth / 14))
+    var arr = this.state.array;
+    this.setBackground(arr);
   }
 
   renderArray() {
     this.updateArray();
     var str = "";
+    console.log(this.state.array);
     this.state.array.forEach(function(row){
-      str += "<p>";
       row.forEach(function(char){
         str += char;
       });
-      str += "</p>";
+      str += "<br />";
     });
     return str;
   }
