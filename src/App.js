@@ -27,8 +27,12 @@ class App extends Component {
 
   initSeaWeed() {
     this.state.rendered.seaWeed = [];
-    for (var i = 0; i < 4; i++) {
-      this.state.rendered.seaWeed.push(SeaWeed.getSeaWeed(this.state.board.length, Math.floor(Math.random() * 100)));
+    var screenWidth = 100;
+    for (var i = 1; i <= 4; i++) {
+      for (var j = 0; j < 8; j++) {
+        this.state.rendered.seaWeed.push(SeaWeed.getSeaWeed(this.state.board.length, Math.floor(
+          Math.random() * ((screenWidth/4)*i - (screenWidth/4)*(i-1)) + ((screenWidth/4)*(i-1)))));
+      }
     }
   }
 
@@ -126,7 +130,7 @@ class App extends Component {
     if (!this.state.rendered.animals || (this.state.rendered.animals.length < 5 && Math.random() > 0.7))
       this.addAnimal()
     this.drawBackground();
-   this.drawRendered();
+    this.drawRendered();
   }
 
   update() {
