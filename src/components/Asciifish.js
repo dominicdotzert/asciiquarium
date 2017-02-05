@@ -85,7 +85,7 @@ class Asciifish extends Component {
 				["B","B","B","B","B","B","B","B",")","/"],
 				["B","B","B","B","B","B","B","B","'"],
 			],
-			color: "gray"
+			color: "#9E9E9E"
 		}
 
 	}

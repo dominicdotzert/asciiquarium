@@ -13,7 +13,8 @@ class App extends Component {
       board: [],
       rendered: [],
       cols: Math.floor(window.innerWidth / 13),
-      rows: Math.floor(window.innerHeight / 24 - 1)
+      rows: Math.floor(window.innerHeight / 24 - 1),
+      frameCount: 0
     };
     this.initBoard();
   }
@@ -29,7 +30,7 @@ class App extends Component {
     this.state.rendered.seaWeed = [];
     var screenWidth = 100;
     for (var i = 1; i <= 4; i++) {
-      for (var j = 0; j < 8; j++) {
+      for (var j = 0; j < 2; j++) {
         this.state.rendered.seaWeed.push(SeaWeed.getSeaWeed(this.state.board.length, Math.floor(
           Math.random() * ((screenWidth/4)*i - (screenWidth/4)*(i-1)) + ((screenWidth/4)*(i-1)))));
       }
@@ -95,7 +96,7 @@ class App extends Component {
 
     var parent = this;
     this.state.rendered.seaWeed.forEach(function(seaWeed) {
-        if(--seaWeed.redraw < 0) {
+        if(parent.state.frameCount % seaWeed.redraw == 0) {
           parent.clear(seaWeed, arr);
           seaWeed = SeaWeed.flip(seaWeed);
           parent.paste(seaWeed, arr);
@@ -136,7 +137,7 @@ class App extends Component {
   addAnimal() {
     if (!this.state.rendered.animals)
       this.state.rendered.animals = [];
-    this.state.rendered.animals.push(Fish.getFish(Math.floor(Math.random() * 10), this.getRandomAvailableRow(), this.state.cols, this.state.rows));
+    this.state.rendered.animals.push(Fish.getFish(Math.floor(Math.random() * 12), this.getRandomAvailableRow(), this.state.cols, this.state.rows));
   }
 
   updateArray() {
@@ -146,12 +147,13 @@ class App extends Component {
 
     this.clearRendered();
     this.drawBackground();
-   this.drawRendered();
+    this.drawRendered();
   }
 
   update() {
     this.setState((prevState) => ({
-      array: this.updateArray()
+      frameCount: prevState.frameCount + 1,
+      array: this.updateArray(),
     }));
   }
 

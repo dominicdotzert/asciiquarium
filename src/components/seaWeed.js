@@ -42,7 +42,7 @@ class SeaWeed extends Component {
       },
       x: x_pos,
       y: bottom_height - 7,
-      redraw: 2,
+      redraw: 3,
       orientation : dirn
     };
   }
@@ -58,7 +58,7 @@ class SeaWeed extends Component {
       },
       x: seaWeed.x,
       y: seaWeed.y,
-      redraw: 2,
+      redraw: 3,
       orientation: dirn
     };
   }

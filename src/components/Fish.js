@@ -31,6 +31,10 @@ class Fish extends Component {
         dir = 1;
         height = maxY - 1 - animal.chars.length;
         break;
+      case 9:
+        animal = Asciifish.getSharkLeft();
+        dir = 4;
+        break;
       case 0:
       case 1:
       case 2:
