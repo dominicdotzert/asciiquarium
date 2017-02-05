@@ -6,30 +6,37 @@ import Asciifish from './Asciifish.js'
 
 class Fish extends Component {
 
-  static getFish(num, height, maxX) {
+  static getFish(num, height, maxX, maxY) {
     var animal;
     var dir;
     switch (num) {
-      case 0:
-      case 1:
-        animal = Asciifish.getWhaleRight();
-        dir = -5;
-        break;
-      case 2:
       case 3:
+      case 4:
+      case 5:
         animal = Asciifish.getWhaleLeft();
         dir = 5;
         break;
-      case 4:
+      case 6:
         animal = Asciifish.getDucksRight();
         dir = -3;
         height = 4 + Math.floor(Math.random() * 3)
         break;
-      case 5:
+      case 7:
         animal = Asciifish.getDucksLeft();
         dir = 3;
         height = 4 + Math.floor(Math.random() * 3)
         break;
+      case 8:
+        animal = Asciifish.getCrab();
+        dir = 1;
+        height = maxY - 1 - animal.chars.length;
+        break;
+      case 0:
+      case 1:
+      case 2:
+      default:
+        animal = Asciifish.getWhaleRight();
+        dir = -5;
     }
     return {
       item: animal,

@@ -136,7 +136,7 @@ class App extends Component {
   addAnimal() {
     if (!this.state.rendered.animals)
       this.state.rendered.animals = [];
-    this.state.rendered.animals.push(Fish.getFish(Math.floor(Math.random() * 6), this.getRandomAvailableRow(), this.state.cols));
+    this.state.rendered.animals.push(Fish.getFish(Math.floor(Math.random() * 10), this.getRandomAvailableRow(), this.state.cols, this.state.rows));
   }
 
   updateArray() {
