@@ -3,7 +3,7 @@ import React, {
 } from 'react';
 import Top from './components/Top.js';
 import Fish from './components/Fish.js';
-import seaWeed from './components/seaWeed.js';
+import SeaWeed from './components/SeaWeed.js';
 
 class App extends Component {
 
@@ -21,6 +21,14 @@ class App extends Component {
   initBoard() {
     for (var i = 0; i < this.state.rows; i++) {
       this.state.board.push(this.setBlank(this.state.cols));
+    }
+    this.initSeaWeed();
+  }
+
+  initSeaWeed() {
+    this.state.rendered.seaWeed = [];
+    for (var i = 0; i < 4; i++) {
+      this.state.rendered.seaWeed.push(SeaWeed.getSeaWeed(this.state.board.length, Math.floor(Math.random() * 100)));
     }
   }
 
@@ -77,8 +85,14 @@ class App extends Component {
     }
     arr[arr.length - 1] = Top.getSolid(this.state.cols);
 
-    var s = seaWeed.getSeaWeed(this.state.board.length);
-    this.paste(s, arr);
+    var parent = this;
+    this.state.rendered.seaWeed.forEach(function(seaWeed) {
+        if(--seaWeed.redraw < 0) {
+          parent.clear(seaWeed, arr);
+          seaWeed = SeaWeed.flip(seaWeed);
+          parent.paste(seaWeed, arr);
+        }
+      });
   }
 
   drawRendered() {
@@ -112,7 +126,7 @@ class App extends Component {
     if (!this.state.rendered.animals || (this.state.rendered.animals.length < 5 && Math.random() > 0.7))
       this.addAnimal()
     this.drawBackground();
-    this.drawRendered();
+   this.drawRendered();
   }
 
   update() {
