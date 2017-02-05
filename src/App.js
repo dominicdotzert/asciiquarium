@@ -131,7 +131,7 @@ class App extends Component {
   }
 
   getRandomAvailableRow() {
-    return Math.floor(Math.random() * (this.state.rows - 12) + 9);
+    return Math.floor(Math.random() * (this.state.rows - 14) + 9);
   }
 
   addAnimal() {
