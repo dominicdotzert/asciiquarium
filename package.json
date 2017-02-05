@@ -2,7 +2,7 @@
   "name": "asciiquarium",
   "version": "0.1.0",
   "private": false,
-  "homepage": "https://myusername.github.io/my-app",
+  "homepage": "https://samyuyitung.github.io/asciiquarium",
   "devDependencies": {
     "gh-pages": "^0.12.0",
     "react-scripts": "0.8.5"
