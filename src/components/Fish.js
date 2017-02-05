@@ -15,7 +15,7 @@ class Fish extends Component {
     }
     var maxW = this.getMaxWidth(animal.chars);
     return {
-      animal: animal,
+      item: animal,
       y: height,
       x: num % 2 === 0 ? maxX + maxW : 0 - maxW,
       dir: num % 2 === 0 ? -1 : 1

@@ -2,29 +2,27 @@ import { Component } from 'react';
 
 class seaWeed extends Component {
 
-  static getSeaWeed(orientation) {
-    var orientation1 = ["(", "(", " "];
-    var orientation2 = [" ", ")", ")"]
+  static getSeaWeed(bottom_height) {
 
-    if orientation {
-      x = orientation1;
-      y = orientation2;
-    }
-    else {
-      x = orientation2;
-      y = orientation1;
-    }
+    var orientation1 = ["(", "(", " "];
+    var orientation2 = [" ", ")", ")"];
+
 
     var arr = [];
-    for(var h = 1; h <= 10; h++) {
-      for(var w = 0; w < 3; w++) {
-        if(x % 2)
-          arr[i].push(x);
-        else
-          arr[i].push(y);
-      }
+    for(var h = 1; h <= 6; h++) {
+      if(h % 2 == 0)
+        arr.push(orientation1);
+      else
+        arr.push(orientation2);
     }
-    return arr;
+    return {
+      item: {
+        chars: arr,
+        color: "green"
+      },
+      x: 6,
+      y: bottom_height - 7
+    };
 }
 
   render() {

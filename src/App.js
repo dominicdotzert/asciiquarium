@@ -3,6 +3,7 @@ import React, {
 } from 'react';
 import Top from './components/Top.js';
 import Fish from './components/Fish.js';
+import seaWeed from './components/seaWeed.js';
 
 class App extends Component {
 
@@ -35,12 +36,12 @@ class App extends Component {
     var animal = JSON.parse(JSON.stringify(realAnimal));
     var col = animal.x;
     var y = animal.y;
-    animal.animal.chars.forEach(function(row) {
+    animal.item.chars.forEach(function(row) {
       row.forEach(function(c) {
-        if (c !== 'B')
+        if (c !== 'setBlank')
           arr[y][col] = {
             char: c,
-            color: animal.animal.color
+            color: animal.item.color
           };
           col++;
       });
@@ -55,12 +56,10 @@ class App extends Component {
     var y = animal.y;
     animal.animal.chars.forEach(function(row) {
       row.forEach(function(c) {
-        if (c !== 'B')
-          arr[y][col] = {
+          arr[y][col++] = {
             char: " ",
             color: ""
           };
-          col++;
       });
       y++;
       col = animal.x;
@@ -75,6 +74,10 @@ class App extends Component {
       arr[i] = Top.getWave(width);
     }
     arr[arr.length - 1] = Top.getSolid(width);
+
+    var s = seaWeed.getSeaWeed(this.state.board.length);
+    console.log(s);
+    this.paste(s, arr);
   }
 
   drawRendered() {
@@ -101,8 +104,7 @@ class App extends Component {
     if (!this.state.rendered.animals || (this.state.rendered.animals.length < 1 && Math.random() > 0.7))
       this.addAnimal()
     this.drawBackground();
-    this.drawRendered();
-    return arr;
+    //this.drawRendered();
   }
 
   update() {
