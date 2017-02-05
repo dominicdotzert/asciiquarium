@@ -18,6 +18,16 @@ class Fish extends Component {
         animal = Asciifish.getWhaleLeft();
         dir = 5;
         break;
+      case 2:
+        animal = Asciifish.getDucksRight();
+        dir = -3;
+        height = 4 + Math.floor(Math.random() * 3)
+        break;
+      case 3:
+        animal = Asciifish.getDucksLeft();
+        dir = 3;
+        height = 4 + Math.floor(Math.random() * 3)
+        break;
     }
     return {
       item: animal,

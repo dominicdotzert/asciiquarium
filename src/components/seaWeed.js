@@ -10,7 +10,7 @@ class seaWeed extends Component {
 
     var arr = [];
     for(var h = 1; h <= 6; h++) {
-      if(h % 2 == 0)
+      if(h % 2 === 0)
         arr.push(orientation1);
       else
         arr.push(orientation2);

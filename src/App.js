@@ -38,10 +38,9 @@ class App extends Component {
     var animal = JSON.parse(JSON.stringify(realAnimal));
     var col = animal.x;
     var y = animal.y;
-    var parent = this;
     animal.item.chars.forEach(function(row) {
       row.forEach(function(c) {
-        if (c !== 'B')
+        if (c !== 'B' && arr[y])
           arr[y][col] = {
             char: c,
             color: animal.item.color
@@ -59,10 +58,13 @@ class App extends Component {
     var y = animal.y;
     animal.item.chars.forEach(function(row) {
       row.forEach(function(c) {
+        if(arr[y]){
         arr[y][col++] = {
           char: " ",
           color: ""
         };
+      } else
+        col++;
       });
       y++;
       col = animal.x;
@@ -71,8 +73,9 @@ class App extends Component {
 
   drawBackground() {
     var arr = this.state.board;
-    arr[0] = Top.getSolid(this.state.cols);
-    for (var i = 1; i < 4; i++) {
+    var top = 5;
+    arr[top] = Top.getSolid(this.state.cols);
+    for (var i = top + 1; i < top + 4; i++) {
       arr[i] = Top.getWave(this.state.cols);
     }
     arr[arr.length - 1] = Top.getSolid(this.state.cols);
@@ -86,31 +89,43 @@ class App extends Component {
     var parent = this;
     if (this.state.rendered.animals) {
       this.state.rendered.animals.forEach(function(animal) {
-        parent.clear(animal, arr);
         animal.x += animal.speed;
-        if (animal.x < -1 * Fish.getMaxWidth(animal.item.chars) - 1 || animal.x > 1 + parent.state.cols){
+        if (animal.x < -1 * Fish.getMaxWidth(animal.item.chars) - 1 || animal.x > 1 + parent.state.cols) {
           parent.state.rendered.animals.splice(parent.state.rendered.animals.indexOf(animal), 1);
+          parent.clear(animal, arr);
+        } else {
+          parent.paste(animal, arr);
         }
-        parent.paste(animal, arr);
+      });
+    }
+  }
+  
+  clearRendered() {
+    var arr = this.state.board;
+    var parent = this;
+    if (this.state.rendered.animals) {
+      this.state.rendered.animals.forEach(function(animal) {
+        parent.clear(animal, arr);
       });
     }
   }
 
-  getRandomAvailableRow(){
-    return Math.floor(Math.random() * (this.state.rows - 5) + 4);
+  getRandomAvailableRow() {
+    return Math.floor(Math.random() * (this.state.rows - 7) + 9);
   }
 
   addAnimal() {
     if (!this.state.rendered.animals)
       this.state.rendered.animals = [];
-    this.state.rendered.animals.push(Fish.getFish(Math.floor(Math.random() * 2), this.getRandomAvailableRow(), this.state.cols));
+    this.state.rendered.animals.push(Fish.getFish(Math.floor(Math.random() * 4), this.getRandomAvailableRow(), this.state.cols));
   }
 
   updateArray() {
 
-    var arr = this.state.board;
-    if (!this.state.rendered.animals || (this.state.rendered.animals.length < 5 && Math.random() > 0.7))
+    if (!this.state.rendered.animals || (this.state.rendered.animals.length < 10 && Math.random() > 0.7))
       this.addAnimal()
+
+    this.clearRendered();
     this.drawBackground();
     this.drawRendered();
   }
@@ -125,7 +140,7 @@ class App extends Component {
     var str = "";
     this.state.board.forEach(function(row) {
       row.forEach(function(obj) {
-        str += "<span style='color:" + obj.color + "'>" + obj.char + "</span>";
+        str += /*"<span style='color:" + obj.color + "'>" + */ obj.char /* + "</span>"*/ ;
       });
       str += "<br />";
     });
