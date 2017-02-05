@@ -42,7 +42,7 @@ class SeaWeed extends Component {
         color: "green"
       },
       x: x_pos,
-      y: bottom_height - 7,
+      y: bottom_height - 6,
       redraw: 3,
       orientation: dirn
     };
