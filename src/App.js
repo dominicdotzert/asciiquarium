@@ -172,7 +172,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.interval = setInterval(() => this.update(), 500);
+    this.interval = setInterval(() => this.update(), 150);
   }
 
   render() {

@@ -35,6 +35,10 @@ class Fish extends Component {
         animal = Asciifish.getSharkLeft();
         dir = 4;
         break;
+      case 10:
+        animal = Asciifish.getSharkRight();
+        dir = -4;
+        break;
       case 0:
       case 1:
       case 2:
