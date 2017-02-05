@@ -1,4 +1,6 @@
-import { Component } from 'react';
+import {
+  Component
+} from 'react';
 
 class SeaWeed extends Component {
 
@@ -13,23 +15,22 @@ class SeaWeed extends Component {
   static getArray(orientation) {
     var arr = [];
     if (orientation < 0) {
-      for(var h = 1; h <= 6; h++) {
-        if(h % 2 === 0)
+      for (var h = 1; h <= 6; h++) {
+        if (h % 2 === 0)
           arr.push(this.getOrientation2());
         else
           arr.push(this.getOrientation1());
       }
-    }
-    else {
-      for(var h = 1; h <= 6; h++) {
-        if(h % 2 === 0)
+    } else {
+      for (var h = 1; h <= 6; h++) {
+        if (h % 2 === 0)
           arr.push(this.getOrientation1());
         else
           arr.push(this.getOrientation2());
       }
     }
     return arr;
-  }    
+  }
 
   static getSeaWeed(bottom_height, x_pos) {
     var arr = [];
@@ -43,7 +44,7 @@ class SeaWeed extends Component {
       x: x_pos,
       y: bottom_height - 7,
       redraw: 3,
-      orientation : dirn
+      orientation: dirn
     };
   }
 

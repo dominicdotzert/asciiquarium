@@ -19,12 +19,12 @@ class Fish extends Component {
       case 6:
         animal = Asciifish.getDucksRight();
         dir = -3;
-        height = 4 + Math.floor(Math.random() * 3)
+        height = 5 + Math.floor(Math.random() * 3)
         break;
       case 7:
         animal = Asciifish.getDucksLeft();
         dir = 3;
-        height = 4 + Math.floor(Math.random() * 3)
+        height = 5 + Math.floor(Math.random() * 3)
         break;
       case 8:
         animal = Asciifish.getCrab();

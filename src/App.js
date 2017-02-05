@@ -37,7 +37,7 @@ class App extends Component {
     }
   }
 
-  setBlank(width) {
+  setBlank(width, row) {
     var tmp = []
     for (var i = 0; i < width; i++) {
       tmp.push({
@@ -88,15 +88,13 @@ class App extends Component {
   drawBackground() {
     var arr = this.state.board;
     var top = 5;
-    arr[top] = Top.getSolid(this.state.cols);
     for (var i = top + 1; i < top + 4; i++) {
       arr[i] = Top.getWave(this.state.cols);
     }
-    arr[arr.length - 1] = Top.getSolid(this.state.cols);
 
     var parent = this;
     this.state.rendered.seaWeed.forEach(function(seaWeed) {
-        if(parent.state.frameCount % seaWeed.redraw == 0) {
+        if(parent.state.frameCount % seaWeed.redraw === 0) {
           parent.clear(seaWeed, arr);
           seaWeed = SeaWeed.flip(seaWeed);
           parent.paste(seaWeed, arr);
@@ -159,7 +157,13 @@ class App extends Component {
 
   renderArray() {
     var str = "";
+    var i = 0
     this.state.board.forEach(function(row) {
+      if(i === 0){
+        str += "<span style='background-color: #7ec0ee'>"
+      } else if(i === 5){
+        str += "</span><div class='underwater'>"
+      }
       row.forEach(function(obj) {
         if(obj.char !== " ")
           str += "<span style='color:" + obj.color + "'>" + obj.char + "</span>"; 
@@ -167,7 +171,9 @@ class App extends Component {
           str += " ";
       });
       str += "<br />";
+      i++;
     });
+    str += "</div>"
     return str;
   }
 
