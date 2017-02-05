@@ -14,17 +14,17 @@ class Fish extends Component {
       case 4:
       case 5:
         animal = Asciifish.getWhaleLeft();
-        dir = 5;
+        dir = 4;
         break;
       case 6:
         animal = Asciifish.getDucksRight();
-        dir = -3;
-        height = 5 + Math.floor(Math.random() * 3)
+        dir = -2;
+        height = 4 + Math.floor(Math.random() * 3)
         break;
       case 7:
         animal = Asciifish.getDucksLeft();
-        dir = 3;
-        height = 5 + Math.floor(Math.random() * 3)
+        dir = 2;
+        height = 4 + Math.floor(Math.random() * 3)
         break;
       case 8:
         animal = Asciifish.getCrab();
@@ -32,15 +32,26 @@ class Fish extends Component {
         height = maxY - 1 - animal.chars.length;
         break;
       case 9:
+        animal = Asciifish.getCrab();
+        dir = -1;
+        height = maxY - 1 - animal.chars.length;
+
+        break;
+      case 10:
         animal = Asciifish.getSharkLeft();
-        dir = 4;
+        dir = 3;
+        break;
+      case 11:
+        animal = Asciifish.getSharkRight();
+        dir = -3;
         break;
       case 0:
       case 1:
       case 2:
       default:
         animal = Asciifish.getWhaleRight();
-        dir = -5;
+        dir = -4;
+        break;
     }
     return {
       item: animal,
