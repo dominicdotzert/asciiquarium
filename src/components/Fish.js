@@ -8,23 +8,26 @@ class Fish extends Component {
 
   static getFish(num, height, maxX) {
     var animal;
+    var dir;
     switch (num) {
       case 0:
         animal = Asciifish.getWhaleRight();
+        dir = -5;
+        break;
+      case 1:
+        animal = Asciifish.getWhaleLeft();
+        dir = 5;
         break;
     }
-    var maxW = this.getMaxWidth(animal.chars);
     return {
       item: animal,
       y: height,
-      x: num % 2 === 0 ? maxX + maxW : 0 - maxW,
-      dir: num % 2 === 0 ? -1 : 1
-
+      x: dir < 0 ? maxX : 0 - this.getMaxWidth(animal.chars),
+      speed: dir
     }
   }
 
   static getMaxWidth(arr) {
-    console.log(arr);
     var max = arr[0].length;
     if (arr[0].constructor === Array) {
       arr.forEach(function(a) {

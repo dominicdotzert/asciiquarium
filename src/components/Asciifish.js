@@ -6,7 +6,16 @@ class Asciifish extends Component {
      (____\/{ */
   static getWhaleRight() {
     return {
-    	chars: [["B","_","_","v","_"], ["(","_","_","_","_","\\","/","{","\""]],
+    	chars: [["B","_","_","v","_"], ["(","_","_","_","_","\\","/","{"]],
+    	color: "#FF0000"
+    };
+  }
+
+  /*    _V__
+     }\/____)*/
+  static getWhaleLeft() {
+    return {
+    	chars: [["B","B","B","_","v","_","_"], ["}","\\","/","_","_","_","_",")"]],
     	color: "#FF0000"
     };
   }

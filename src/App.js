@@ -11,14 +11,16 @@ class App extends Component {
     super(props);
     this.state = {
       board: [],
-      rendered: []
+      rendered: [],
+      cols: Math.floor(window.innerWidth / 13),
+      rows: Math.floor(window.innerHeight / 24 - 1)
     };
     this.initBoard();
   }
 
-  initBoard(){
-    for (var i = 0; i < window.innerHeight / 24 - 1; i++) {
-      this.state.board.push(this.setBlank(window.innerWidth / 12));
+  initBoard() {
+    for (var i = 0; i < this.state.rows; i++) {
+      this.state.board.push(this.setBlank(this.state.cols));
     }
   }
 
@@ -36,14 +38,15 @@ class App extends Component {
     var animal = JSON.parse(JSON.stringify(realAnimal));
     var col = animal.x;
     var y = animal.y;
+    var parent = this;
     animal.item.chars.forEach(function(row) {
       row.forEach(function(c) {
-        if (c !== 'setBlank')
+        if (c !== 'B')
           arr[y][col] = {
             char: c,
             color: animal.item.color
           };
-          col++;
+        col++;
       });
       y++;
       col = animal.x;
@@ -54,12 +57,12 @@ class App extends Component {
     var animal = JSON.parse(JSON.stringify(realAnimal));
     var col = animal.x;
     var y = animal.y;
-    animal.animal.chars.forEach(function(row) {
+    animal.item.chars.forEach(function(row) {
       row.forEach(function(c) {
-          arr[y][col++] = {
-            char: " ",
-            color: ""
-          };
+        arr[y][col++] = {
+          char: " ",
+          color: ""
+        };
       });
       y++;
       col = animal.x;
@@ -68,15 +71,13 @@ class App extends Component {
 
   drawBackground() {
     var arr = this.state.board;
-    var width = window.innerWidth / 12
-    arr[0] = Top.getSolid(width);
+    arr[0] = Top.getSolid(this.state.cols);
     for (var i = 1; i < 4; i++) {
-      arr[i] = Top.getWave(width);
+      arr[i] = Top.getWave(this.state.cols);
     }
-    arr[arr.length - 1] = Top.getSolid(width);
+    arr[arr.length - 1] = Top.getSolid(this.state.cols);
 
     var s = seaWeed.getSeaWeed(this.state.board.length);
-    console.log(s);
     this.paste(s, arr);
   }
 
@@ -86,25 +87,32 @@ class App extends Component {
     if (this.state.rendered.animals) {
       this.state.rendered.animals.forEach(function(animal) {
         parent.clear(animal, arr);
-        animal.x -= 5;
+        animal.x += animal.speed;
+        if (animal.x < -1 * Fish.getMaxWidth(animal.item.chars) - 1 || animal.x > 1 + parent.state.cols){
+          parent.state.rendered.animals.splice(parent.state.rendered.animals.indexOf(animal), 1);
+        }
         parent.paste(animal, arr);
       });
     }
   }
 
+  getRandomAvailableRow(){
+    return Math.floor(Math.random() * (this.state.rows - 5) + 4);
+  }
+
   addAnimal() {
     if (!this.state.rendered.animals)
       this.state.rendered.animals = [];
-    this.state.rendered.animals.push(Fish.getFish(Math.floor(Math.random() * 0), 10, window.innerWidth / 12));
+    this.state.rendered.animals.push(Fish.getFish(Math.floor(Math.random() * 2), this.getRandomAvailableRow(), this.state.cols));
   }
 
   updateArray() {
 
     var arr = this.state.board;
-    if (!this.state.rendered.animals || (this.state.rendered.animals.length < 1 && Math.random() > 0.7))
+    if (!this.state.rendered.animals || (this.state.rendered.animals.length < 5 && Math.random() > 0.7))
       this.addAnimal()
     this.drawBackground();
-    //this.drawRendered();
+    this.drawRendered();
   }
 
   update() {
