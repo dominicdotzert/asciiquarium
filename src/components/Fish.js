@@ -11,19 +11,21 @@ class Fish extends Component {
     var dir;
     switch (num) {
       case 0:
+      case 1:
         animal = Asciifish.getWhaleRight();
         dir = -5;
         break;
-      case 1:
+      case 2:
+      case 3:
         animal = Asciifish.getWhaleLeft();
         dir = 5;
         break;
-      case 2:
+      case 4:
         animal = Asciifish.getDucksRight();
         dir = -3;
         height = 4 + Math.floor(Math.random() * 3)
         break;
-      case 3:
+      case 5:
         animal = Asciifish.getDucksLeft();
         dir = 3;
         height = 4 + Math.floor(Math.random() * 3)

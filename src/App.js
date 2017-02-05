@@ -53,11 +53,12 @@ class App extends Component {
     animal.item.chars.forEach(function(row) {
       row.forEach(function(c) {
         if (c !== 'B' && arr[y])
-          arr[y][col] = {
+          arr[y][col++] = {
             char: c,
             color: animal.item.color
           };
-        col++;
+          else
+          col++;
       });
       y++;
       col = animal.x;
@@ -129,13 +130,13 @@ class App extends Component {
   }
 
   getRandomAvailableRow() {
-    return Math.floor(Math.random() * (this.state.rows - 7) + 9);
+    return Math.floor(Math.random() * (this.state.rows - 12) + 9);
   }
 
   addAnimal() {
     if (!this.state.rendered.animals)
       this.state.rendered.animals = [];
-    this.state.rendered.animals.push(Fish.getFish(Math.floor(Math.random() * 4), this.getRandomAvailableRow(), this.state.cols));
+    this.state.rendered.animals.push(Fish.getFish(Math.floor(Math.random() * 6), this.getRandomAvailableRow(), this.state.cols));
   }
 
   updateArray() {
@@ -145,7 +146,7 @@ class App extends Component {
 
     this.clearRendered();
     this.drawBackground();
-    this.drawRendered();
+   this.drawRendered();
   }
 
   update() {
@@ -158,7 +159,10 @@ class App extends Component {
     var str = "";
     this.state.board.forEach(function(row) {
       row.forEach(function(obj) {
-        str += /*"<span style='color:" + obj.color + "'>" + */ obj.char /* + "</span>"*/ ;
+        if(obj.char !== " ")
+          str += "<span style='color:" + obj.color + "'>" + obj.char + "</span>"; 
+        else
+          str += " ";
       });
       str += "<br />";
     });
