@@ -28,11 +28,10 @@ class App extends Component {
 
   initSeaWeed() {
     this.state.rendered.seaWeed = [];
-    var screenWidth = 100;
     for (var i = 1; i <= 4; i++) {
       for (var j = 0; j < 2; j++) {
         this.state.rendered.seaWeed.push(SeaWeed.getSeaWeed(this.state.board.length, Math.floor(
-          Math.random() * ((screenWidth/4)*i - (screenWidth/4)*(i-1)) + ((screenWidth/4)*(i-1)))));
+          (Math.random() * (this.state.cols/4)) + ((this.state.cols/4)*(i-1)))));
       }
     }
   }
